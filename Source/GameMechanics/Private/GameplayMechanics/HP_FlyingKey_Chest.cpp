@@ -108,7 +108,7 @@ void AHP_FlyingKey_Chest::OnInteracted_Implementation(AGameMechanicsCharacter* P
 
 void AHP_FlyingKey_Chest::InteractPure(AGameMechanicsCharacter* PCharacter)
 {
-	//if (!bKeyAtLocation) return;
+	if (!bKeyAtLocation) return;
 
 	//Keep a ref to the player character so we can reposses it after we finish or leave
 	PlayerChar = PCharacter;
@@ -204,8 +204,8 @@ FVector AHP_FlyingKey_Chest::GetRandomPointInArea()
 	FVector LocalPoint = GetRootComponent()->GetComponentTransform().
 	                                         InverseTransformPosition(RandomPoint);
 
-	DrawDebugBox(GetWorld(), SidePos, SideBoxSize, FColor::Cyan, false, 1.0f);
-	DrawDebugPoint(GetWorld(), LocalPoint, 20.0f, FColor::Black, false, 1.0f);
+	//DrawDebugBox(GetWorld(), SidePos, SideBoxSize, FColor::Cyan, false, 1.0f);
+	//DrawDebugPoint(GetWorld(), LocalPoint, 20.0f, FColor::Black, false, 1.0f);
 
 	return LocalPoint;
 }
