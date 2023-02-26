@@ -80,14 +80,11 @@ void AGameMechanicsCharacter::Interact()
 			Cast<IInteractable_Interface>(ActorInRange)->InteractPure(this);
 		}
 		else
-		{
 			GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Orange,TEXT("Didnt Implement Interface"));
-		}
 	}
 	else
-	{
 		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Orange,TEXT("No Actor In Range"));
-	}
+	
 }
 
 void AGameMechanicsCharacter::Tick(float DeltaTime)

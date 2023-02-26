@@ -48,5 +48,6 @@ protected:
 
 private:
 	bool bCanMove = false;
+	bool bCanOverlap = true;
 	float DistanceAlongSpline;
 };

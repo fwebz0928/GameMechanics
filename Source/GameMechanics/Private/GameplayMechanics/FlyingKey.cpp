@@ -5,6 +5,7 @@
 
 #include "GameFramework/PawnMovementComponent.h"
 
+
 // Sets default values
 AFlyingKey::AFlyingKey()
 {
@@ -36,8 +37,6 @@ void AFlyingKey::Tick(float DeltaTime)
 
 	if (bCanMove)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Blue,TEXT("moving key"));
-
 		float DistanceToMove = MovementSpeed * DeltaTime;
 		float SplineLength = MovementSpline->GetSplineLength();
 
@@ -70,6 +69,9 @@ void AFlyingKey::Tick(float DeltaTime)
 
 void AFlyingKey::GoToChestLocation()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Blue,TEXT("Player Overlapped"));
+	//check if we can overlap so not constantly calling overlap calls if player is getting near the key while it moves
+	if (bCanOverlap == false) return;
 	bCanMove = true;
+	bCanOverlap = false;
+	OverlapComponent->SetActive(false);
 }
