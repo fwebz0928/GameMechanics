@@ -10,6 +10,10 @@ UCLASS()
 class GAMEMECHANICS_API AAH_SnapLock_Bulb : public AActor
 {
 	GENERATED_BODY()
+
+
+
+	
 	
 public:	
 	// Sets default values for this actor's properties

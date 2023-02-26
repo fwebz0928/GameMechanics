@@ -10,15 +10,16 @@ UCLASS()
 class GAMEMECHANICS_API AAH_SnapLock : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Components, meta = (AllowPrivateAccess = "true"))
+	UStaticMeshComponent* SnapLockMesh;
+
+public:
 	// Sets default values for this actor's properties
 	AAH_SnapLock();
 
 protected:
 
 
-public:	
-
-
+public:
 };

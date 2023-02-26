@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
+#include "Components/HealthComponent.h"
+#include "Widgets/MainPlayerWidget.h"
 #include "GameMechanicsCharacter.generated.h"
 
 class UInputComponent;
@@ -39,6 +41,9 @@ class AGameMechanicsCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	class UInputAction* MoveAction;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Component, meta = (AllowPrivateAccess = "true"))
+	UHealthComponent* HealthComponent;
+
 public:
 	AGameMechanicsCharacter();
 
@@ -70,13 +75,22 @@ protected:
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
-
-protected:
+	
 	// APawn interface
 	virtual void SetupPlayerInputComponent(UInputComponent* InputComponent) override;
 	// End of APawn interface
 
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Widget, meta=(AllowPrivateAccess = "true"))
+	TSubclassOf<UMainPlayerWidget> PlayerMainWidgetClass;
+	UPROPERTY()
+	UMainPlayerWidget* MainPlayerWidget;
+
+	
 public:
+	UFUNCTION(BlueprintCallable)
+	UHealthComponent* GetHealthComponent() const { return HealthComponent; }
+
 	/** Returns Mesh1P subobject **/
 	USkeletalMeshComponent* GetMesh1P() const { return Mesh1P; }
 	/** Returns FirstPersonCameraComponent subobject **/

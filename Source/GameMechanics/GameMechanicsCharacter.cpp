@@ -34,6 +34,8 @@ AGameMechanicsCharacter::AGameMechanicsCharacter()
 	Mesh1P->CastShadow = false;
 	//Mesh1P->SetRelativeRotation(FRotator(0.9f, -19.19f, 5.2f));
 	Mesh1P->SetRelativeLocation(FVector(-30.f, 0.f, -150.f));
+
+	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("Health Component"));
 }
 
 void AGameMechanicsCharacter::BeginPlay()
@@ -49,6 +51,14 @@ void AGameMechanicsCharacter::BeginPlay()
 		{
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
 		}
+	}
+
+	//Create the player widget and add it to the viewport 
+	MainPlayerWidget = CreateWidget<UMainPlayerWidget>(GetWorld(), PlayerMainWidgetClass);
+	if (MainPlayerWidget != nullptr)
+	{
+		MainPlayerWidget->AddToViewport();
+		MainPlayerWidget->PlayerCharacter = this;
 	}
 }
 
@@ -84,7 +94,6 @@ void AGameMechanicsCharacter::Interact()
 	}
 	else
 		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Orange,TEXT("No Actor In Range"));
-	
 }
 
 void AGameMechanicsCharacter::Tick(float DeltaTime)
